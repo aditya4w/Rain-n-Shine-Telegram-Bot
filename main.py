@@ -1,8 +1,17 @@
-from config import TOKEN, WEATHER_API, BOT_USERNAME
 from telegram import Update
 from telegram.ext import CommandHandler, ApplicationBuilder, ContextTypes, MessageHandler, filters
 import requests
 
+# for railway hosting and local
+import os
+try:
+    from config import TOKEN, WEATHER_API, BOT_USERNAME
+except ImportError:
+     TOKEN = os.environ.get("TOKEN")
+     WEATHER_API = os.environ.get("WEATHER_API")
+     BOT_USERNAME = os.environ.get("BOT_USERNAME")
+
+###################
 
 async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Hello there, Welcome to Rain 'n Shine Bot. Use \'/weather <city>\' to know the weather :)")
